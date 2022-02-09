@@ -1,0 +1,142 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model FormModel
+<div class="row">
+    <div class="col-3">
+        <form asp-action="Search" asp-controller="Home">
+            <div class="form-group">
+                <label asp-for="APIkey">APIkey</label>
+                <input class="form-control" asp-for="APIkey" placeholder="API key goes here" />
+            </div>
+            <div class="form-group">
+                <label asp-for="CityName">City Name</label>
+                <input class="form-control" asp-for="CityName" placeholder="City name goes here" />
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+    <div class="col-9">
+        @if (@Model.Latitude != 0)
+        {
+            <table class="table table-bordered">
+                <tbody>
+                    @if (@Model.Message != null)
+                    {
+                        <tr>
+                            <td>Report Accuracy</td>
+                            <td>@Model.Message</td>
+                        </tr>
+                    }
+                    @if (@Model.APICityName != null)
+                    {
+                        <tr>
+                            <td>Location</td>
+                            <td>
+                                @Model.APICityName ,
+                                @Model.Country
+                            </td>
+                        </tr>
+                    }
+
+                    @if (@Model.Latitude != null)
+                    {
+                        <tr>
+                            <td>Latitude</td>
+                            <td>@Model.Latitude</td>
+                        </tr>
+                    }
+                    @if (@Model.Longitude != null)
+                    {
+                        <tr>
+                            <td>Longitude</td>
+                            <td>@Model.Longitude</td>
+                        </tr>
+                    }
+                    @if (@Model.CurrentTemp != null)
+                    {
+                        <tr>
+                            <td>Current Temperature (&deg;F)</td>
+                            <td>@Model.CurrentTemp</td>
+                        </tr>
+                    }
+                    @if (@Model.TempMax != null)
+                    {
+                        <tr>
+                            <td>Today's Maximum Temperature (&deg;F)</td>
+                            <td>@Model.TempMax</td>
+                        </tr>
+                    }
+                    @if (@Model.TempMin != null)
+                    {
+                        <tr>
+                            <td>Today's Minimum Temperature (&deg;F)</td>
+                            <td>@Model.TempMin</td>
+                        </tr>
+                    }
+                    @if (@Model.Pressure != null)
+                    {
+                        <tr>
+                            <td>Pressure in HH/mg</td>
+                            <td>@Model.Pressure</td>
+                        </tr>
+                    }
+                    @if (@Model.Humidity != null)
+                    {
+                        <tr>
+                            <td>Humidity in kg/m3</td>
+                            <td>@Model.Humidity</td>
+                        </tr>
+                    } @if (@Model.Rain != null)
+                    {
+                        <tr>
+                            <td>Rain</td>
+                            <td>@Model.Rain</td>
+                        </tr>
+                    } @if (@Model.Snow != null)
+                    {
+                        <tr>
+                            <td>Snow</td>
+                            <td>@Model.Snow</td>
+                        </tr>
+                    } @if (@Model.Winddegree != null)
+                    {
+                        <tr>
+                            <td>Wind direction</td>
+                            <td>@Model.Winddegree</td>
+                        </tr>
+                    }
+                    @if (@Model.WindSpeed != null)
+                    {
+                        <tr>
+                            <td>Wind Speed in Knots</td>
+                            <td>@Model.WindSpeed</td>
+                        </tr>
+                    }
+                    @if (@Model.WeatherDesc != null)
+                    {
+                        <tr>
+                            <td>Status</td>
+                            <td>@Model.WeatherDesc</td>
+                        </tr>
+                    }
+                    @if (@Model.Winddegree != null)
+                    {
+                        <tr>
+                            <td>Wind direction</td>
+                            <td>@Model.Winddegree</td>
+                        </tr>
+                    }
+                    @if (@Model.SkyStatus != null)
+                    {
+                        <tr>
+                            <td>Sky Status</td>
+                            <td>@Model.SkyStatus</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+    </div>
+</div>
