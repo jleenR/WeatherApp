@@ -1,18 +1,54 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+}
+
+@import url(http://fonts.googleapis.com/css?family=Nunito:300&text=:);
+
+#realtime {
+    font-family: Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
+    font-weight: 100;
+    display: block;
+    text-align: center;
+    font-size: 40px;
+    justify-content: center;
+    align-items: center;
+    color: #0b5ed7;
+}
+
+    #realtime span {
+        display: inline-block;
+        font-family: Avenir Next, Nunito, sans-serif;
+        font-weight: 100;
+        font-size: 8vw;
+        position: relative;
+        top: -2vw;
+    }
+
+@media all and (max-width: 600px) {
+    #realtime {
+        font-size: 4rem;
+        padding: 2rem 0;
+    }
+}
+
+@media all and (max-width: 350px) {
+    #realtime {
+        font-size: 3rem;
+        padding: 2rem 0;
+    }
 }

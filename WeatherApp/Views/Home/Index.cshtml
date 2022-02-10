@@ -2,20 +2,65 @@
     ViewData["Title"] = "Home Page";
 }
 @model FormModel
+@section scripts{
+<script type="text/javascript">
+        $(document).ready(function () {
+            var currentTime = document.getElementById("realtime");
+            function zeropadder(n) {
+              return (parseInt(n,10) < 10 ? '0' : '')+n;
+            }
+            function updateTime(){
+              var timeNow= new Date(),
+              hh = timeNow.getHours(),
+              mm = timeNow.getMinutes(),
+              ss = timeNow.getSeconds(),
+              formatAMPM = (hh >= 12?'PM':'AM');
+              hh = hh % 12 || 12;
+              currentTime.innerHTML = hh + "<span'height:40px' >:</span>" + zeropadder(mm) + "<span'height:40px'>:</span>" + zeropadder(ss) + " " + formatAMPM;
+              setTimeout(updateTime,1000);
+            }
+            updateTime();
+    });
+</script>
+}
+
+
 <div class="row">
     <div class="col-3">
-        <form asp-action="Search" asp-controller="Home">
-            <div class="form-group">
-                <label asp-for="APIkey">APIkey</label>
-                <input class="form-control" asp-for="APIkey" placeholder="Enter API key" />
+
+        <div class="row">
+            <div class="col-12">
+                <form asp-action="Search" asp-controller="Home">
+                    <div class="form-group">
+                        <label asp-for="APIkey">API Key</label>
+                        <input class="form-control" asp-for="APIkey" placeholder="Enter API key" required="required" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CityName">City Name</label>
+                        <input class="form-control" asp-for="CityName" placeholder="Enter City, State & Country" required="required" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="CityName">City Name</label>
-                <input class="form-control" asp-for="CityName" placeholder="Enter City, State & Country" />
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <br />
+                <hr />
             </div>
-            <button type="submit" class="btn btn-primary">Search</button>
-        </form>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div id="realtime">
+                    @*  <div >
+                        </div>*@
+                </div>
+            </div>
+
+        </div>
+
     </div>
+
     <div class="col-9">
         @if (@Model.Latitude != 0)
         {
@@ -53,6 +98,20 @@
                             <td>@Model.Longitude</td>
                         </tr>
                     }
+                    @if (@Model.WeatherDesc != null)
+                    {
+                        <tr>
+                            <td>Sky Clarity</td>
+                            <td>@Model.WeatherDesc</td>
+                        </tr>
+                    }
+                    @if (@Model.CloudCover != null)
+                    {
+                        <tr>
+                            <td>Cloud Cover (%)</td>
+                            <td>@Model.CloudCover</td>
+                        </tr>
+                    }
                     @if (@Model.CurrentTemp != null)
                     {
                         <tr>
@@ -74,57 +133,11 @@
                             <td>@Model.TempMin</td>
                         </tr>
                     }
-                    @if (@Model.Pressure != null)
+                    @if (@Model.CurrentTempfeelslike != null)
                     {
                         <tr>
-                            <td>Pressure in HH/mg</td>
-                            <td>@Model.Pressure</td>
-                        </tr>
-                    }
-                    @if (@Model.Humidity != null)
-                    {
-                        <tr>
-                            <td>Humidity in kg/m3</td>
-                            <td>@Model.Humidity</td>
-                        </tr>
-                    } @if (@Model.Rain != null)
-                    {
-                        <tr>
-                            <td>Rain</td>
-                            <td>@Model.Rain</td>
-                        </tr>
-                    } @if (@Model.Snow != null)
-                    {
-                        <tr>
-                            <td>Snow</td>
-                            <td>@Model.Snow</td>
-                        </tr>
-                    } @if (@Model.Winddegree != null)
-                    {
-                        <tr>
-                            <td>Wind direction</td>
-                            <td>@Model.Winddegree</td>
-                        </tr>
-                    }
-                    @if (@Model.WindSpeed != null)
-                    {
-                        <tr>
-                            <td>Wind Speed in Knots</td>
-                            <td>@Model.WindSpeed</td>
-                        </tr>
-                    }
-                    @if (@Model.WeatherDesc != null)
-                    {
-                        <tr>
-                            <td>Status</td>
-                            <td>@Model.WeatherDesc</td>
-                        </tr>
-                    }
-                    @if (@Model.Winddegree != null)
-                    {
-                        <tr>
-                            <td>Wind direction</td>
-                            <td>@Model.Winddegree</td>
+                            <td>Feels like (&deg;F)</td>
+                            <td>@Model.CurrentTempfeelslike</td>
                         </tr>
                     }
                     @if (@Model.SkyStatus != null)
@@ -134,9 +147,52 @@
                             <td>@Model.SkyStatus</td>
                         </tr>
                     }
+                    @if (@Model.Humidity != null)
+                    {
+                        <tr>
+                            <td>Humidity (%)</td>
+                            <td>@Model.Humidity</td>
+                        </tr>
+                    }
+                    @if (@Model.Rain != null)
+                    {
+                        <tr>
+                            <td>Rain</td>
+                            <td>@Model.Rain</td>
+                        </tr>
+                    }
+                    @if (@Model.Snow != null)
+                    {
+                        <tr>
+                            <td>Snow</td>
+                            <td>@Model.Snow</td>
+                        </tr>
+                    }
+                    @if (@Model.Winddegree != null)
+                    {
+                        <tr>
+                            <td>Wind direction in Degrees</td>
+                            <td>@Model.Winddegree</td>
+                        </tr>
+                    }
+                    @if (@Model.WindSpeed != null)
+                    {
+                        <tr>
+                            <td>Wind Speed in MPH</td>
+                            <td>@Model.WindSpeed</td>
+                        </tr>
+                    }
+                    @if (@Model.Pressure != null)
+                    {
+                        <tr>
+                            <td>Pressure in HH/mg</td>
+                            <td>@Model.Pressure</td>
+                        </tr>
+                    }
+
+
                 </tbody>
             </table>
         }
-
     </div>
 </div>
