@@ -23,8 +23,6 @@
     });
 </script>
 }
-
-
 <div class="row">
     <div class="col-3">
 
@@ -52,13 +50,9 @@
         <div class="row">
             <div class="col-12">
                 <div id="realtime">
-                    @*  <div >
-                        </div>*@
                 </div>
             </div>
-
         </div>
-
     </div>
 
     <div class="col-9">
@@ -154,20 +148,6 @@
                             <td>@Model.Humidity</td>
                         </tr>
                     }
-                    @if (@Model.Rain != null)
-                    {
-                        <tr>
-                            <td>Rain</td>
-                            <td>@Model.Rain</td>
-                        </tr>
-                    }
-                    @if (@Model.Snow != null)
-                    {
-                        <tr>
-                            <td>Snow</td>
-                            <td>@Model.Snow</td>
-                        </tr>
-                    }
                     @if (@Model.Winddegree != null)
                     {
                         <tr>
@@ -189,8 +169,6 @@
                             <td>@Model.Pressure</td>
                         </tr>
                     }
-
-
                 </tbody>
             </table>
         }
